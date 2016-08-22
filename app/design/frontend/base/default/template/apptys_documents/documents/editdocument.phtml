@@ -1,0 +1,70 @@
+<?php if($this->getTitle()): ?>
+<div class="page-title">
+    <h1><?php echo $this->getTitle() ?></h1>
+</div>
+<?php endif; ?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<script type="text/javascript" src="<?php echo Mage::getUrl('',array('_secure'=>true));?>js/mage/adminhtml/uploader.js"></script>
+<form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data">
+    <div class="fieldset">
+    <?php echo $this->getBlockHtml('formkey')?>
+    <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+    <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+        <h2 class="legend"><?php echo $this->__('Document Information') ?></h2>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <label for="file_name" class="required"><em>*</em><?php echo $this->__('Filename') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="file_name" value="<?php echo $this->escapeHtml($this->getDocument()->getFile_name()) ?>" title="<?php echo $this->__('Filename') ?>" class="input-text " id="file_name" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="file_type" class="required"><em>*</em><?php echo $this->__('File Type') ?></label>
+                    <div class="input-box">
+                        <?php echo $this->getFileTypesHtml() ?>
+                    </div>
+                </div>
+            </li>
+            <li class="wide">
+                <label for="file_description" class="required"><em>*</em><?php echo $this->__('Description') ?></label>
+                <div class="input-box">
+                    <textarea name="file_description" id="file_description" title="<?php echo $this->__('Description') ?>"
+                              value="<?php echo $this->escapeHtml($this->getDocument()->getFile_description()) ?>"
+                              class="input-text "><?php echo $this->escapeHtml($this->getDocument()->getFile_description()) ?></textarea>
+                </div>
+            </li>
+            <li>
+                <label <?php echo (!$this->getDocument()->getDocumentId()) ? 'class="required"><em>*</em>' . $this->__('Upload Document: ') : '>' . $this->__('Upload/Replace Document'); ?>
+                    <span id='file_upload_text'></span>
+                </label>
+                <div class="input-box">
+                    <input id="file_upload" type="file" name="file_upload" />
+                </div>
+            </li>
+
+            <?php if(in_array(substr($this->getDocument()->getFilepath(),-4),$this->getImageExtensionsArray())): ?>
+                <li style="margin-top:30px;">
+                    <label><?php echo $this->__('Uploaded Document'); ?></label><br/>
+                    <div class="block" style="width:85%; height:320px; overflow:scroll; padding:25px; text-align:center; background-color:#747474;">
+                        <img src="/documents/index/download/filehash/<?php echo $this->getDocument()->getFilehash(); ?>" />
+                    </div>
+                </li>
+            <?php elseif($this->getDocument()->getFilepath()): ?>
+                <li style="margin-top:30px;">
+                    <label><?php echo $this->__('Uploaded Document') ?>: </label><br/>
+                    <div class="uploaded_document">
+                        <a href="/documents/index/download/filehash/<?php echo $this->getDocument()->getFilehash(); ?>" target="_blank">
+                            <?php echo $this->getDocument()->getFilepath(); ?>
+                        </a>
+                    </div>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        <button type="submit" title="<?php echo $this->__('Save Document') ?>" class="button"><span><span><?php echo $this->__('Save Document') ?></span></span></button>
+    </div>
+</form>

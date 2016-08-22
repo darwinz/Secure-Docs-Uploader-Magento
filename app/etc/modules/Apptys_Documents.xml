@@ -1,0 +1,8 @@
+<config>
+	<modules>
+		<Apptys_Documents>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Apptys_Documents>
+	</modules>
+</config>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<layout>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink">
+                <name>apptys_documents_tab</name>
+                <path>apptys_documents/index/index</path>
+                <label>Documents</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <apptys_documents_index_index>
+        <update handle="customer_account" />
+	    <reference name="my.account.wrapper">
+	        <block type="apptys_documents/documents_book" name="apptys_documents_content"/> 
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+	    </reference>      
+    </apptys_documents_index_index>
+
+
+    <apptys_documents_index_form>
+        <!-- Mage_Customer -->        
+        <reference name='head'>
+            <action method="addItem"><type>js</type><name>mage/adminhtml/uploader.js</name></action>
+        </reference>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="apptys_documents/documents_edit" name="apptys_documents_edit" template="apptys_documents/documents/editdocument.phtml"/>
+        </reference>
+    </apptys_documents_index_form>
+</layout>

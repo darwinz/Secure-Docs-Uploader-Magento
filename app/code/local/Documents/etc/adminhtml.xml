@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <apptys_documents translate="title" module="apptys_documents">
+            <title>Uploaded Documents</title>
+            <sort_order>15</sort_order>
+            <children>
+                <managedoc translate="title" module="apptys_documents">
+                    <title>Manage Documents</title>
+                    <sort_order>1</sort_order>
+                    <action>adminhtml/managedoc/index</action>
+                </managedoc>
+            </children>
+        </apptys_documents>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <documents translate="title" module="apptys_documents">
+                        <title>Documents</title>
+                        <sort_order>1</sort_order>
+                        <children>
+                            <managedoc>
+                                <title>Manage Documents</title>
+                            </managedoc>
+                        </children>
+                    </documents>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
